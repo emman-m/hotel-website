@@ -2,73 +2,103 @@
 
 namespace App\Controllers;
 
+/**
+ * Class Home
+ * 
+ * Controller for the main pages of the hotel website
+ */
 class Home extends BaseController
 {
+    /**
+     * Display the homepage
+     */
     public function index()
     {
-        return view('home');
+        return $this->renderView('home', [
+            'title' => 'Welcome to Luxury Hotel'
+        ]);
     }
 
+    /**
+     * Display the rooms page
+     */
     public function rooms()
     {
-        $rooms = [
-            [
-                'id' => 1,
-                'name' => 'Deluxe Room',
-                'description' => 'Spacious room with city view',
-                'price' => 150,
-                'image' => 'deluxe-room.jpg'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Executive Suite',
-                'description' => 'Luxury suite with separate living area',
-                'price' => 250,
-                'image' => 'executive-suite.jpg'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Presidential Suite',
-                'description' => 'Ultimate luxury with panoramic views',
-                'price' => 500,
-                'image' => 'presidential-suite.jpg'
-            ]
-        ];
-
-        return view('rooms', ['rooms' => $rooms]);
+        return $this->renderView('rooms', [
+            'title' => 'Our Rooms & Suites'
+        ]);
     }
 
+    /**
+     * Display the booking page
+     */
     public function booking()
     {
-        if ($this->request->getMethod() === 'post') {
-            $bookingData = [
-                'name' => $this->request->getPost('name'),
-                'email' => $this->request->getPost('email'),
-                'check_in' => $this->request->getPost('check_in'),
-                'check_out' => $this->request->getPost('check_out'),
-                'room_type' => $this->request->getPost('room_type')
-            ];
-
-            // Store in localStorage (handled by JavaScript)
-            return $this->response->setJSON(['success' => true, 'data' => $bookingData]);
-        }
-
-        return view('booking');
+        return $this->renderView('booking', [
+            'title' => 'Book Your Stay'
+        ]);
     }
 
-    public function contact()
+    /**
+     * Handle booking form submission
+     */
+    public function submitBooking()
     {
-        if ($this->request->getMethod() === 'post') {
-            $contactData = [
-                'name' => $this->request->getPost('name'),
-                'email' => $this->request->getPost('email'),
-                'message' => $this->request->getPost('message')
-            ];
-
-            // Store in localStorage (handled by JavaScript)
-            return $this->response->setJSON(['success' => true, 'data' => $contactData]);
+        if (!$this->validateForm('booking')) {
+            return redirect()->back()->withInput();
         }
 
-        return view('contact');
+        $bookingData = [
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'room_type' => $this->request->getPost('room_type'),
+            'check_in' => $this->request->getPost('check_in'),
+            'check_out' => $this->request->getPost('check_out'),
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($this->saveToLocalStorage('bookings', $bookingData)) {
+            $this->session->setFlashdata('success', 'Booking submitted successfully!');
+        } else {
+            $this->session->setFlashdata('error', 'Failed to save booking. Please try again.');
+        }
+
+        return redirect()->to('/booking');
+    }
+
+    /**
+     * Display the contact page
+     */
+    public function contact()
+    {
+        return $this->renderView('contact', [
+            'title' => 'Contact Us'
+        ]);
+    }
+
+    /**
+     * Handle contact form submission
+     */
+    public function submitContact()
+    {
+        if (!$this->validateForm('contact')) {
+            return redirect()->back()->withInput();
+        }
+
+        $contactData = [
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'subject' => $this->request->getPost('subject'),
+            'message' => $this->request->getPost('message'),
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($this->saveToLocalStorage('contacts', $contactData)) {
+            $this->session->setFlashdata('success', 'Message sent successfully!');
+        } else {
+            $this->session->setFlashdata('error', 'Failed to send message. Please try again.');
+        }
+
+        return redirect()->to('/contact');
     }
 }

@@ -3,80 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Hotel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title><?= $title ?? 'Luxury Hotel' ?></title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Animation Classes */
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .animate-slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        .animate-slide-left {
+            animation: slideInLeft 0.6s ease-out;
+        }
+        .animate-slide-right {
+            animation: slideInRight 0.6s ease-out;
+        }
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        /* Hover Effects */
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Form Styles */
+        .form-input {
+            @apply w-full px-4 py-3 bg-transparent border-b-2 border-gray-300 focus:border-gray-900 focus:outline-none transition-colors duration-300;
+        }
+        .form-label {
+            @apply block text-sm font-medium text-gray-700 mb-1;
+        }
+        .form-error {
+            @apply text-red-500 text-sm mt-1;
+        }
+        .btn-primary {
+            @apply inline-block px-8 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors duration-300;
+        }
+        .btn-secondary {
+            @apply inline-block px-8 py-3 border-2 border-black text-black rounded hover:bg-black hover:text-white transition-colors duration-300;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="min-h-screen flex flex-col">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="/" class="text-2xl font-bold text-gray-800">Luxury Hotel</a>
-                    </div>
-                    <div class="hidden md:ml-6 md:flex md:space-x-8">
-                        <a href="/" class="inline-flex items-center px-1 pt-1 text-gray-900">Home</a>
-                        <a href="/rooms" class="inline-flex items-center px-1 pt-1 text-gray-500 hover:text-gray-900">Rooms</a>
-                        <a href="/booking" class="inline-flex items-center px-1 pt-1 text-gray-500 hover:text-gray-900">Book Now</a>
-                        <a href="/contact" class="inline-flex items-center px-1 pt-1 text-gray-500 hover:text-gray-900">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?= view('partials/nav') ?>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <main class="flex-grow">
+        <?php if (session()->has('success')): ?>
+            <div class="fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded shadow-lg animate-slide-left z-50">
+                <?= session('success') ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->has('error')): ?>
+            <div class="fixed top-20 right-4 bg-red-500 text-white px-6 py-3 rounded shadow-lg animate-slide-left z-50">
+                <?= session('error') ?>
+            </div>
+        <?php endif; ?>
+
         <?= $this->renderSection('content') ?>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-                    <p>123 Hotel Street</p>
-                    <p>City, Country</p>
-                    <p>Phone: +1 234 567 890</p>
-                    <p>Email: info@luxuryhotel.com</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul>
-                        <li><a href="/" class="hover:text-gray-300">Home</a></li>
-                        <li><a href="/rooms" class="hover:text-gray-300">Rooms</a></li>
-                        <li><a href="/booking" class="hover:text-gray-300">Book Now</a></li>
-                        <li><a href="/contact" class="hover:text-gray-300">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 border-t border-gray-700 pt-8 text-center">
-                <p>&copy; <?= date('Y') ?> Luxury Hotel. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <?= view('partials/footer') ?>
 
+    <!-- CSRF Token -->
     <script>
-        // Common JavaScript functions
-        function saveToLocalStorage(key, data) {
-            localStorage.setItem(key, JSON.stringify(data));
-        }
+        const csrfToken = '<?= csrf_hash() ?>';
+        
+        // Add CSRF token to all forms
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = '<?= csrf_token() ?>';
+                csrfInput.value = csrfToken;
+                form.appendChild(csrfInput);
+            });
+        });
+    </script>
 
-        function getFromLocalStorage(key) {
-            const data = localStorage.getItem(key);
-            return data ? JSON.parse(data) : null;
-        }
+    <!-- Flash Message Auto-hide -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.fixed.top-20');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transition = 'opacity 0.5s ease-out';
+                    setTimeout(() => message.remove(), 500);
+                }, 3000);
+            });
+        });
     </script>
 </body>
 </html> 
