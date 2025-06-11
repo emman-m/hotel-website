@@ -4,7 +4,7 @@
 <!-- Hero Section -->
 <div class="relative h-screen">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Hotel exterior">
+        <img class="w-full h-full object-cover" src="<?= base_url('images/pool.jpg') ?>" alt="Hotel exterior">
         <div class="absolute inset-0 bg-black/50"></div>
     </div>
     <div class="relative h-full flex items-center">
@@ -128,7 +128,7 @@
 <!-- Call to Action -->
 <div class="relative py-24 bg-black">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Hotel exterior">
+        <img class="w-full h-full object-cover opacity-20" src="<?= base_url('images/pool.jpg') ?>" alt="Hotel exterior">
     </div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-4xl font-bold text-white mb-6 fade-in-on-scroll">Ready to Experience Luxury?</h2>

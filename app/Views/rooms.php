@@ -4,7 +4,7 @@
 <!-- Hero Section -->
 <div class="relative h-[40vh]">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Luxury room">
+        <img class="w-full h-full object-cover" src="<?= base_url('images/queen-bed.jpg') ?>" alt="Luxury room">
         <div class="absolute inset-0 bg-black/50"></div>
     </div>
     <div class="relative h-full flex items-center">
@@ -22,7 +22,7 @@
             <!-- Deluxe Room -->
             <div class="fade-in-on-scroll hover-scale">
                 <div class="relative h-96 mb-6 overflow-hidden rounded-2xl">
-                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Deluxe Room" class="w-full h-full object-cover">
+                    <img src="<?= base_url('images/queen-bed.jpg') ?>" alt="Deluxe Room" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/20 hover:bg-black/40 transition-colors duration-300"></div>
                 </div>
                 <h3 class="text-3xl font-bold text-gray-900 mb-4">Deluxe Room</h3>
@@ -160,7 +160,7 @@
 <!-- Call to Action -->
 <div class="relative py-24 bg-black">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Luxury room">
+        <img class="w-full h-full object-cover opacity-20" src="<?= base_url('images/queen-bed.jpg') ?>" alt="Luxury room">
     </div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-4xl font-bold text-white mb-6 fade-in-on-scroll">Ready to Book Your Stay?</h2>
