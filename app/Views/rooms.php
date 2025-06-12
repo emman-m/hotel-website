@@ -56,7 +56,7 @@
             <!-- Executive Suite -->
             <div class="fade-in-on-scroll hover-scale" style="animation-delay: 0.2s;">
                 <div class="relative h-96 mb-6 overflow-hidden rounded-2xl">
-                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Executive Suite" class="w-full h-full object-cover">
+                    <img src="<?= base_url('images/executive-suite.jpg')?>" alt="Executive Suite" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/20 hover:bg-black/40 transition-colors duration-300"></div>
                 </div>
                 <h3 class="text-3xl font-bold text-gray-900 mb-4">Executive Suite</h3>
@@ -90,7 +90,7 @@
             <!-- Presidential Suite -->
             <div class="fade-in-on-scroll hover-scale" style="animation-delay: 0.4s;">
                 <div class="relative h-96 mb-6 overflow-hidden rounded-2xl">
-                    <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Presidential Suite" class="w-full h-full object-cover">
+                    <img src="<?= base_url('images/president-suite.jpg') ?>" alt="Presidential Suite" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/20 hover:bg-black/40 transition-colors duration-300"></div>
                 </div>
                 <h3 class="text-3xl font-bold text-gray-900 mb-4">Presidential Suite</h3>
